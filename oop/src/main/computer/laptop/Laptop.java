@@ -22,6 +22,6 @@ public interface Laptop {
 
     void showSystemUsage();
 
-    void InitializeRegisteredUser(String userId, String password);
+    void initializeRegisteredUser(String userId, String password);
 
 }
