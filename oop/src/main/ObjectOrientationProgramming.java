@@ -13,6 +13,7 @@ public class ObjectOrientationProgramming {
 
         System.out.println("사용자 정보를 입력해주세요.");
         Scanner scanner = new Scanner(System.in);
+
         System.out.println("이름 : ");
         String userName = scanner.next();
 
