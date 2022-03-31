@@ -7,6 +7,7 @@ import java.util.List;
 public class DellNotebook implements Laptop {
     private Integer display = 13;
     private String vender = "dell";
+    private String laptopId;
     private String model;
     private Integer cpu;
     private Integer ram;

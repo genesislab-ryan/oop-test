@@ -8,6 +8,7 @@ public class Macbook implements Laptop {
 
     private Integer display = 13;
     private String vender = "apple";
+    private String laptopId;
     private String model;
     private Integer cpu;
     private Integer ram;
