@@ -1,4 +1,5 @@
 package main.computer.laptop;
 
-public class DellNotebook implements Labtop {
+public class DellNotebook implements Laptop {
+
 }
