@@ -15,7 +15,28 @@ public class MsExcel implements Application{
     private List<Macbook> applicationInstalledMacbook;
     private List<DellNotebook> applicationInstalledDellNotebook;
 
+    @Override
     public void showApplicationInfo(){
 
     }
+
+    @Override
+    public void subtractUsageFromLaptop(Macbook macbook){
+
+    };
+
+    @Override
+    public void addUsageFromLaptop(Macbook macbook){
+
+    };
+
+    @Override
+    public void subtractUsageFromLaptop(DellNotebook dellNotebook){
+
+    };
+
+    @Override
+    public void addUsageFromLaptop(DellNotebook dellNotebook){
+
+    };
 }
