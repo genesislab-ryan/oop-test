@@ -8,14 +8,14 @@ import java.util.List;
 public class User {
 
     private String userName;
-    private String userId;
+    private Integer userId ;
     private String address;
     private String phoneNumber;
     private String birthDate;
     private String password;
     private List<Laptop> laptopList = new ArrayList<>();
 
-    public User (String userName, String userId, String address, String phoneNumber, String birthDate, String password) { // 생성자 초기화
+    public User (String userName, Integer userId, String address, String phoneNumber, String birthDate, String password) { // 생성자 초기화
         this.userName = userName;
         this.userId = userId;
         this.address = address;
@@ -26,7 +26,7 @@ public class User {
 
     public String getUserName() {return userName;}
 
-    public String getUserId() {return userId;}
+    public Integer getUserId() {return userId;}
 
     public String getPassword() {return password;}
 
