@@ -1,15 +1,12 @@
 package main;
 
+import main.computer.laptop.DellNotebook;
 import main.computer.laptop.Laptop;
 import main.computer.laptop.Macbook;
-import main.computer.laptop.Portable;
 import main.user.User;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class ObjectOrientationProgramming {
 
@@ -61,7 +58,7 @@ public class ObjectOrientationProgramming {
     public static void main(String[] args) throws IOException {
         List<User> allRegisteredUserList = new ArrayList<>(); // 등록한 User 정보
         List<Laptop> allLaptopList = new ArrayList<>(); // 전체 노트북 리스트 (dell, macbook)
-        HashMap<String, User> allRegisteredLaptopList = new HashMap<>(); // 등록된 노트북 : laptop ID, 유저 정보
+        HashMap<Laptop, User> allRegisteredLaptopList = new HashMap<>(); // 등록된 노트북 : laptop ID, 유저 정보
         User currentUser = null; // 현재 접속 중인 사용자 (초기화 값은 null)
         Boolean onOff = true;
 
@@ -117,17 +114,29 @@ public class ObjectOrientationProgramming {
                         break;
                     }
 
-                    if (currentUser.getLaptopIdList() == null){
+                    if (currentUser.getLaptopList().isEmpty()){
                         System.out.println("사용자의 노트북을 등록합니다. 노트북의 제조 번호를 입력해주세요.");
 
                         System.out.println("제조번호 : ");
                         String laptopId = scanner.next();
-                        if (allRegisteredLaptopList.containsKey(laptopId)){
-                            System.out.println("이미 다른 사용자에게 등록된 랩탑입니다. 제조번호를 확인해주세요. ");
+
+                        System.out.println("모델명 : ");
+                        String model = scanner.next();
+
+                        for(Map.Entry<Laptop, User> set : allRegisteredLaptopList.entrySet()){
+                            if (set.getKey().getLaptopId() == laptopId){
+                                System.out.println("이미 다른 사용자에게 등록된 랩탑입니다. 제조번호를 확인해주세요.");
+                                break;
+                            }
+                        }
+                        if (model.equals("macbook air") || model.equals("macbook pro")){
+                            Macbook macbook = new Macbook(laptopId, model);
+                            allRegisteredLaptopList.put(macbook, currentUser);
+                            currentUser.getLaptopList().add(macbook);
                         }else{
-                            System.out.println("노트북이 성공적으로 등록되었습니다. ");
-                            allRegisteredLaptopList.put(laptopId, currentUser);
-                            currentUser.getLaptopIdList().add(laptopId);
+                            DellNotebook dellNotebook = new DellNotebook(laptopId, model);
+                            allRegisteredLaptopList.put(dellNotebook, currentUser);
+                            currentUser.getLaptopList().add(dellNotebook);
                         }
                     }else{
                         System.out.println("이미 등록된 노트북이 존재합니다.");

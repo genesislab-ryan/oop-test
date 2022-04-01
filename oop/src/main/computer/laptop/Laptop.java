@@ -124,6 +124,10 @@ public abstract class Laptop implements Portable {
         }
     };
 
+    public User getRegisteredUser() {
+        return registeredUser;
+    }
+
     @Override
     public User setRegisteredUser (User user){
         registeredUser = user;
@@ -136,5 +140,9 @@ public abstract class Laptop implements Portable {
         this.cpu = cpu;
         this.ram = ram;
         this.disk = disk;
+    }
+
+    public String getLaptopId() {
+        return laptopId;
     }
 }

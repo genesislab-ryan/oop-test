@@ -2,6 +2,7 @@ package main.user;
 
 import main.computer.laptop.Laptop;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class User {
@@ -12,7 +13,7 @@ public class User {
     private String phoneNumber;
     private String birthDate;
     private String password;
-    private List<Laptop> laptopIdList;
+    private List<Laptop> laptopList = new ArrayList<>();
 
     public User (String userName, String userId, String address, String phoneNumber, String birthDate, String password) { // 생성자 초기화
         this.userName = userName;
@@ -29,12 +30,20 @@ public class User {
 
     public String getPassword() {return password;}
 
-    public List<Laptop> getLaptopIdList() {
-        return laptopIdList;
+    public List<Laptop> getLaptopList() {
+        return laptopList;
     }
 
-    public void setLaptopIdList(Laptop laptop) {
-        laptopIdList.add(laptop);
+    public String getAddress() {
+        return address;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public void setLaptopList(Laptop laptop) {
+        laptopList.add(laptop);
     }
 
     public void showRegisteredUserInfo (){
@@ -45,16 +54,16 @@ public class User {
     }
 
     public void registerMyLaptop(Laptop laptop){
-        if (laptopIdList.contains(laptop)){
+        if (laptopList.contains(laptop)){
             System.out.println("이미 소유하고 있는 랩탑입니다.");
         }else{
-            laptopIdList.add(laptop);
+            laptopList.add(laptop);
             System.out.println(userName + "님의 랩탑으로 등록되었습니다.");
         }
     }
 
     public void handOverLaptop(Laptop laptop){
-        laptopIdList.remove(laptop);
+        laptopList.remove(laptop);
         laptop.initializeRegisteredUser(userId, password);
     }
 }
