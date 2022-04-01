@@ -33,8 +33,8 @@ public class User {
         return laptopIdList;
     }
 
-    public void setLaptopIdList(List<String> laptopIdList) {
-        laptopIdList = laptopIdList;
+    public void setLaptopIdList(String laptopId) {
+        laptopIdList.add(laptopId);
     }
 
     public void showRegisteredUserInfo (){
