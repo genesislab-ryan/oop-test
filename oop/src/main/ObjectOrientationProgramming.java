@@ -12,7 +12,8 @@ public class ObjectOrientationProgramming {
 
     public static void main(String[] args) throws IOException {
         List<User> allRegisteredUserList = new ArrayList<>(); // 등록한 User 정보
-        HashMap<String, User> allRegisteredLaptopList = new HashMap<>(); // laptop ID, 유저 정보
+        List<Object> allLaptopList = new ArrayList<>(); // 전체 노트북 리스트 (dell, macbook)
+        HashMap<String, User> allRegisteredLaptopList = new HashMap<>(); // 등록된 노트북 : laptop ID, 유저 정보
         User currentUser = new User(null, null, null, null, null, null);; // 현재 접속 중인 사용자 (초기화 값은 null)
         Scanner scanner = new Scanner(System.in);
         System.out.println("oop test 프로그램입니다.");
@@ -112,10 +113,7 @@ public class ObjectOrientationProgramming {
                     System.out.println("노트북이 성공적으로 등록되었습니다. ");
                     allRegisteredLaptopList.put(laptopId, currentUser);
                 }
-
-
             }
-
         }
 
 

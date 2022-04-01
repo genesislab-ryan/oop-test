@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Macbook implements Laptop {
 
-    private Integer display = 13;
+    private Integer display;
     private String vender = "apple";
     private String laptopId;
     private String model;
@@ -19,8 +19,9 @@ public class Macbook implements Laptop {
     private Double weight = 1.5;
     private User registeredUser;
 
-    public Macbook(){
-
+    public Macbook(String laptopId, String model){
+        this.laptopId = laptopId;
+        this.model = model;
     }
 
     @Override
@@ -67,6 +68,12 @@ public class Macbook implements Laptop {
         }
 
     };
+
+    public void setModelSpec(Integer cpu, Integer ram, Integer disk){
+        this.cpu = cpu;
+        this.ram = ram;
+        this.disk = disk;
+    }
 
     public void setRegisteredUser (User user){
         registeredUser = user;

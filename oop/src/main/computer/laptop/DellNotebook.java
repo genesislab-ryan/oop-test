@@ -18,8 +18,9 @@ public class DellNotebook implements Laptop {
     private double weight = 1.8;
     private User registeredUser;
 
-    public DellNotebook(){
-
+    public DellNotebook(String laptopId, String model){
+        this.laptopId = laptopId;
+        this.model = model;
     }
 
     @Override
@@ -62,6 +63,12 @@ public class DellNotebook implements Laptop {
         }
 
     };
+
+    public void setModelSpec(Integer cpu, Integer ram, Integer disk){
+        this.cpu = cpu;
+        this.ram = ram;
+        this.disk = disk;
+    }
 
     public User setRegisteredUser (User user){
         registeredUser = user;
