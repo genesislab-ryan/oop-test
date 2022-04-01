@@ -15,21 +15,22 @@ import static org.junit.Assert.*;
 class UserTest {
 
     String userName = "tester";
-    String userId = "1";
+    Integer userId = 1;
     String address = "울릉도 동남쪽 뱃길따라 이백리";
     String phoneNumber = "010-1234-5678";
     String birthDate = "1999-12-12";
     String password = "1234";
     Macbook macbook = new Macbook("1a2b3c4d", "macbook air");
     DellNotebook dellNotebook = new DellNotebook("d4c3b2a1", "XPS");
-    User user = new User(userName, userId, address, phoneNumber, birthDate, password);
+    Integer userIdCount = 0;
+    User user = new User(userName, ++userIdCount, address, phoneNumber, birthDate, password);
 
     @Test
     @DisplayName("생성한 유저 정보 가져오기")
     void registeredUserInfoTest() {
 
         assertEquals(user.getUserName(), "tester");
-        assertEquals(user.getUserId(), "1");
+        assertEquals(user.getUserId(), (Integer)  1);
         assertEquals(user.getAddress(), "울릉도 동남쪽 뱃길따라 이백리");
         assertEquals(user.getBirthDate(), "1999-12-12");
         assertEquals(user.getPassword(), "1234");
@@ -39,7 +40,7 @@ class UserTest {
     @DisplayName("잘못된 유저 정보 입력하기")
     void notRegisteredUserInfoTest(){
         assertNotEquals(user.getUserName(), "test");
-        assertNotEquals(user.getUserId(), "2");
+        assertNotEquals(user.getUserId(), (Integer) 2);
         assertNotEquals(user.getAddress(), "독도 북서쪽 뱃길따라 이백리");
         assertNotEquals(user.getBirthDate(), "1999-01-01");
         assertNotEquals(user.getPassword(), "4321");
@@ -48,9 +49,9 @@ class UserTest {
     @Test
     @DisplayName("생성한 유저 정보에 노트북 등록하기")
     void registerMyLaptopTest() {
-        User macbookUser = new User(userName, userId, address, phoneNumber, birthDate, password);
-        User dellNotebookUser = new User(userName, userId, address, phoneNumber, birthDate, password);
-        User allLaptopUser = new User(userName, userId, address, phoneNumber, birthDate, password);
+        User macbookUser = new User(userName, ++userIdCount, address, phoneNumber, birthDate, password);
+        User dellNotebookUser = new User(userName, ++userIdCount, address, phoneNumber, birthDate, password);
+        User allLaptopUser = new User(userName, ++userIdCount, address, phoneNumber, birthDate, password);
 
         macbookUser.registerMyLaptop(macbook);
         dellNotebookUser.registerMyLaptop(dellNotebook);
@@ -71,9 +72,9 @@ class UserTest {
     @DisplayName("생성한 유저 정보에 등록안 된 노트북 입력하기")
     void notRegisterMyLaptopTest() {
 
-        User macbookUser = new User(userName, userId, address, phoneNumber, birthDate, password);
-        User dellNotebookUser = new User(userName, userId, address, phoneNumber, birthDate, password);
-        User allLaptopUser = new User(userName, userId, address, phoneNumber, birthDate, password);
+        User macbookUser = new User(userName, ++userIdCount, address, phoneNumber, birthDate, password);
+        User dellNotebookUser = new User(userName, ++userIdCount, address, phoneNumber, birthDate, password);
+        User allLaptopUser = new User(userName, ++userIdCount, address, phoneNumber, birthDate, password);
 
         macbookUser.registerMyLaptop(macbook);
         dellNotebookUser.registerMyLaptop(dellNotebook);
