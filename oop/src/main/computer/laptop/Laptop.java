@@ -26,8 +26,8 @@ public abstract class Laptop implements Portable {
     }
 
     @Override
-    public Boolean systemStart(String userId, String password){
-        if (registeredUser.getUserId() == userId && registeredUser.getPassword() == password){
+    public Boolean systemStart(Integer userId, String password){
+        if (registeredUser.getUserId().equals(userId) && registeredUser.getPassword().equals(password)){
             systemStart = true;
             System.out.println("환영합니다. " + registeredUser.getUserName() + "님!");
         } else{
@@ -60,8 +60,8 @@ public abstract class Laptop implements Portable {
     };
 
     @Override
-    public void initializeRegisteredUser(String userId, String password){
-        if (registeredUser.getUserId() == userId && registeredUser.getPassword() == password){
+    public void initializeRegisteredUser(Integer userId, String password){
+        if (registeredUser.getUserId().equals(userId) && registeredUser.getPassword().equals(password)){
             registeredUser = null;
             System.out.println("노트북의 계정 정보가 초기화되었습니다.");
         }else{

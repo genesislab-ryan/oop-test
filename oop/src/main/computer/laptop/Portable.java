@@ -6,7 +6,7 @@ import main.user.User;
 
 public interface Portable<T> {
 
-    T systemStart(String userId, String password);
+    T systemStart(Integer userId, String password);
 
     void systemOff();
 
@@ -22,7 +22,7 @@ public interface Portable<T> {
 
     void showSystemUsage();
 
-    void initializeRegisteredUser(String userId, String password);
+    void initializeRegisteredUser(Integer userId, String password);
 
     T setRegisteredUser (User user);
 
