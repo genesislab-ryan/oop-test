@@ -23,6 +23,16 @@ public class User {
         this.birthDate = birthDate;
         this.password = password;
     }
+
+    public User (String userName, String userId, String address, String phoneNumber, String birthDate, String password, List<String> laptopIdList) { // 생성자 초기화
+        this.userName = userName;
+        this.userId = userId;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.birthDate = birthDate;
+        this.password = password;
+        this.laptopIdList = laptopIdList;
+    }
     public String getUserName() {return userName;}
 
     public String getUserId() {return userId;}
