@@ -1,10 +1,10 @@
 package main.computer.laptop;
-import main.user.User;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
-public interface Laptop<T> {
+import main.application.Application;
+import main.application.ApplicationInfo;
+import main.user.User;
+
+public interface Portable<T> {
 
     T systemStart(String userId, String password);
 
@@ -12,16 +12,20 @@ public interface Laptop<T> {
 
     void showLaptopInfo();
 
-    T installApplication(Integer applicationId);
+    T installApplication(ApplicationInfo applicationId);
 
-    void deleteApplication(Integer applicationId);
+    void deleteApplication(ApplicationInfo applicationId);
 
-    void runApplication(Integer applicationId);
+    void runApplication(ApplicationInfo applicationId);
 
-    void exitApplication(Integer applicationId);
+    void exitApplication(ApplicationInfo applicationId);
 
     void showSystemUsage();
 
     void initializeRegisteredUser(String userId, String password);
+
+    T setRegisteredUser (User user);
+
+    void setModelSpec(Integer cpu, Integer ram, Integer disk);
 
 }
