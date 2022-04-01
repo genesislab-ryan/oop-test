@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public interface Laptop {
+public interface Laptop<T> {
 
-    Boolean systemStart(String userId, String password);
+    T systemStart(String userId, String password);
 
     void systemOff();
 
     void showLaptopInfo();
 
-    List<Integer> installApplication(Integer applicationId);
+    T installApplication(Integer applicationId);
 
     void deleteApplication(Integer applicationId);
 

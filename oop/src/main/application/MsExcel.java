@@ -1,42 +1,35 @@
 package main.application;
 
-import main.computer.laptop.DellNotebook;
-import main.computer.laptop.Macbook;
+public class MsExcel extends ApplicationInfo {
 
-import java.util.List;
+    private Integer applicationId = 1;
+    private Integer cpuUsage = 1;
+    private Integer ramUsage = 3;
+    private Integer diskUsage = 20;
+    private String applicationName = "Ms Excel";
 
-public class MsExcel implements Application{
 
-    private Integer applicationId;
-    private String marketPlace;
-    private Integer cpuUsage;
-    private Integer ramUsage;
-    private Integer diskUsage;
-    private List<Macbook> applicationInstalledMacbook;
-    private List<DellNotebook> applicationInstalledDellNotebook;
-
-    @Override
-    public void showApplicationInfo(){
-
+    public MsExcel(Integer applicationId, String applicationName, String marketPlace){
+        super(applicationId, applicationName, marketPlace);
     }
 
     @Override
-    public void subtractUsageFromLaptop(Macbook macbook){
+    public void showApplicationInfo(){
+        System.out.println("=================애플리케이션은 정보=============");
+        System.out.println("애플리케이션 이름 : " + applicationName + "\n애플리케이션 ID : "
+                + applicationId + "\nCPU 사용량 : " + cpuUsage + "\nRAM 사용량 : " + ramUsage + "Disk 사용량 : "  + diskUsage);
+        System.out.println("============================================");
+    }
 
-    };
+    public Integer getCpuUsage() {
+        return cpuUsage;
+    }
 
-    @Override
-    public void addUsageFromLaptop(Macbook macbook){
+    public Integer getDiskUsage() {
+        return diskUsage;
+    }
 
-    };
-
-    @Override
-    public void subtractUsageFromLaptop(DellNotebook dellNotebook){
-
-    };
-
-    @Override
-    public void addUsageFromLaptop(DellNotebook dellNotebook){
-
-    };
+    public Integer getRamUsage() {
+        return ramUsage;
+    }
 }
