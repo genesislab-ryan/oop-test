@@ -19,18 +19,18 @@ public class MsExcelTest implements Application {
 
     }
 
-    @Override
-    public void exitApplicationFromLaptop(Laptop laptop){
-
-    };
-
-    @Override
-    public void deleteApplicationFromLaptop(Laptop laptop){
-
-    };
-
-    @Override
-    public void runApplicationFromLaptop(Laptop laptop){
-
-    };
+//    @Override
+//    public void exitApplicationFromLaptop(Laptop laptop){
+//
+//    };
+//
+//    @Override
+//    public void deleteApplicationFromLaptop(Laptop laptop){
+//
+//    };
+//
+//    @Override
+//    public void runApplicationFromLaptop(Laptop laptop){
+//
+//    };
 }

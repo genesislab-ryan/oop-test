@@ -1,5 +1,8 @@
 package main.computer.laptop;
 
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
 public class MacbookTest extends Laptop {
 
     private String vender = "apple";
