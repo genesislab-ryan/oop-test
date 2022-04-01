@@ -1,6 +1,12 @@
 package main.computer.laptop;
 
-import main.computer.laptop.Laptop;
+public class MacbookTest extends Laptop {
 
-public class MacbookTest implements Laptop {
+    private String vender = "apple";
+    private Integer display = 11;
+    private Double weight = 1.5;
+
+    public MacbookTest (String laptopId, String model){
+        super(laptopId, model);
+    }
 }
