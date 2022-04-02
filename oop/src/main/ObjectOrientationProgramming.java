@@ -183,7 +183,7 @@ public class ObjectOrientationProgramming {
                     }
 
                 case 4: // 사용자 노트북 등록
-                    if (currentUser == null){ // condition currentUser.equals(null) always false
+                    if (currentUser == null){
                         System.out.println("노트북 등록 전, 로그인을 먼저 수행해주세요.");
                         break;
                     }
@@ -204,7 +204,7 @@ public class ObjectOrientationProgramming {
                     break;
 
                 case 5: // 다른 사용자에게 노트북 양도하기
-                    if (currentUser == null){ // condition currentUser.equals(null) always false
+                    if (currentUser == null){
                         System.out.println("노트북 양도 수행 전, 로그인을 먼저 수행해주세요.");
                         break;
                     }
@@ -212,7 +212,7 @@ public class ObjectOrientationProgramming {
                     break;
 
                 case 6: // 랩탑 실행
-                    if (currentUser == null){ // condition currentUser.equals(null) always false
+                    if (currentUser == null){
                         System.out.println("노트북 실행 전, 로그인을 먼저 수행해주세요.");
                         break;
                     }
@@ -225,15 +225,18 @@ public class ObjectOrientationProgramming {
                     break;
 
                 case 7: // 랩탑 종료
-
+                    if (currentUser == null){
+                        System.out.println("현재 접속 중인 사용자 정보가 없어 랩탑을 종료할 수 없습니다.");
+                        break;
+                    }
+                    currentLaptop.systemOff();
+                    currentLaptop = null;
                     break;
 
                 case 8: // 랩탑 시스템 정보 출력
-
                     break;
 
                 case 9: // 랩탑 시스템 사용량 출력
-
                     break;
 
                 case 10: // 랩탑에 설치된 애플리케이션 조회
