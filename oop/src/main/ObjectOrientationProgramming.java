@@ -98,6 +98,27 @@ public class ObjectOrientationProgramming {
         }
     }
 
+    public static void handOverLaptop(Scanner scanner,List<User> allRegisteredUserList, User currentUser){
+        scanner.nextLine();
+
+        System.out.println("양도할 유저 : ");
+        String userName = scanner.nextLine();
+
+        System.out.println("양도할 노트북 모델 : ");
+        String userLaptopId = scanner.nextLine();
+
+        for (User handOverUser : allRegisteredUserList){
+            if (handOverUser.getUserName().equals(userName)){
+                for(Laptop currentUserLaptop : currentUser.getLaptopList()){
+                    if (currentUserLaptop.getLaptopId().equals(userLaptopId)){
+                        currentUser.handOverLaptop(currentUserLaptop, handOverUser);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
     public static void main(String[] args) throws IOException {
         List<User> allRegisteredUserList = new ArrayList<>(); // 등록한 User 정보
         List<Laptop> allLaptopList = new ArrayList<>(); // 전체 노트북 리스트 (dell, macbook)
@@ -164,26 +185,7 @@ public class ObjectOrientationProgramming {
                     break;
 
                 case 5: // 다른 사용자에게 노트북 양도하기
-
-                    scanner.nextLine();
-
-                    System.out.println("양도할 유저 : ");
-                    String userName = scanner.nextLine();
-
-                    System.out.println("양도할 노트북 모델 : ");
-                    String userLaptopId = scanner.nextLine();
-
-                    for (User handOverUser : allRegisteredUserList){
-                        if (handOverUser.getUserName().equals(userName)){
-                            for(Laptop currentUserLaptop : currentUser.getLaptopList()){
-                                if (currentUserLaptop.getLaptopId().equals(userLaptopId)){
-                                    currentUser.handOverLaptop(currentUserLaptop, handOverUser);
-                                    break;
-                                }
-                            }
-                        }
-                    }
-
+                    handOverLaptop(scanner, allRegisteredUserList, currentUser);
                     break;
 
                 case 6: // 랩탑 실행
