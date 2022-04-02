@@ -74,11 +74,13 @@ public class ObjectOrientationProgramming {
     public static Laptop registerLaptop(Scanner scanner, HashMap<Laptop, User> allRegisteredLaptopList){
         System.out.println("사용자의 노트북을 등록합니다. 노트북의 제조 번호를 입력해주세요.");
 
+        scanner.nextLine();
+
         System.out.println("제조번호 : ");
-        String laptopId = scanner.next();
+        String laptopId = scanner.nextLine();
 
         System.out.println("모델명 : ");
-        String model = scanner.next();
+        String model = scanner.nextLine();
 
         for(Map.Entry<Laptop, User> set : allRegisteredLaptopList.entrySet()){
             if (set.getKey().getLaptopId().equals(laptopId)){
@@ -86,7 +88,8 @@ public class ObjectOrientationProgramming {
                 return null;
             }
         }
-        if (model.equals("macbook air") || model.equals("macbook pro")){
+
+        if ("macbook air".equals(model) || "macbook pro".equals(model)){
             Macbook macbook = new Macbook(laptopId, model);
             return macbook;
         }else{
@@ -110,12 +113,14 @@ public class ObjectOrientationProgramming {
             messageInfo();
 
             Integer number = scanner.nextInt();
+
             switch (number){
                 case 1: // 사용자 객체 정보 입력
                     currentUser = registerUserInfo(scanner, ++userIdCount);
                     allRegisteredUserList.add(currentUser);
                     currentUser.showRegisteredUserInfo();
                     break;
+
                 case 2: // 기존 사용자로 접속
                     while (true){
                         if (allRegisteredUserList.isEmpty()){
@@ -126,6 +131,7 @@ public class ObjectOrientationProgramming {
                         break;
                     }
                     break;
+
                 case 3: // 사용자 정보 조회
                     if (currentUser == null){ // condition currentUser.equals(null) always false
                         System.out.println("로그인을 먼저 해주세요.");
@@ -134,6 +140,7 @@ public class ObjectOrientationProgramming {
                         currentUser.showRegisteredUserInfo();
                         break;
                     }
+
                 case 4: // 사용자 노트북 등록
                     if (currentUser == null){ // condition currentUser.equals(null) always false
                         System.out.println("노트북 등록 전, 로그인을 먼저 수행해주세요.");
@@ -144,6 +151,8 @@ public class ObjectOrientationProgramming {
 
                         Laptop notebook = registerLaptop(scanner, allRegisteredLaptopList);
 
+                        if (notebook == null) break; // 이미 다른 사용자에게 등록된 랩탑으로 null 을 반환했을 때
+
                         allRegisteredLaptopList.put(notebook, currentUser);
                         currentUser.getLaptopList().add(notebook);
                     }else{
@@ -152,38 +161,48 @@ public class ObjectOrientationProgramming {
                     break;
 
                 case 5: // 다른 사용자에게 노트북 양도하기
-
                     break;
+
                 case 6: // 랩탑 실행
 
                     break;
+
                 case 7: // 랩탑 종료
 
                     break;
+
                 case 8: // 랩탑 시스템 정보 출력
 
                     break;
+
                 case 9: // 랩탑 시스템 사용량 출력
 
                     break;
+
                 case 10: // 랩탑에 설치된 애플리케이션 조회
 
                     break;
+
                 case 11: // 신규 애플리케이션 설치
 
                     break;
+
                 case 12: // 애플리케이션 실행
 
                     break;
+
                 case 13: // 애플리케이션 종료
 
                     break;
+
                 case 14: // 애플리케이션 삭제
 
                     break;
+
                 case -1: // 프로그램 종료
                     System.out.println("프로그램을 종료합니다.");
                     onOff = false;
+                    scanner.close();
                     break;
 
                 default:
