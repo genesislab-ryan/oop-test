@@ -234,9 +234,11 @@ public class ObjectOrientationProgramming {
                     break;
 
                 case 8: // 랩탑 시스템 정보 출력
+                    currentLaptop.showLaptopInfo();
                     break;
 
                 case 9: // 랩탑 시스템 사용량 출력
+                    currentLaptop.showSystemUsage();
                     break;
 
                 case 10: // 랩탑에 설치된 애플리케이션 조회
