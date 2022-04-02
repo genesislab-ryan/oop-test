@@ -119,6 +119,25 @@ public class ObjectOrientationProgramming {
         }
     }
 
+    public static Laptop startLaptop(Scanner scanner, User currentUser){
+        System.out.println("랩탑을 실행합니다. 제조번호와 모델명을 입력해주세요. ");
+
+        scanner.nextLine();
+
+        System.out.println("제조번호 : ");
+        String laptopId = scanner.nextLine();
+
+        System.out.println("모델명 : ");
+        String model = scanner.nextLine();
+
+        for (Laptop laptop : currentUser.getLaptopList()){
+            if (laptop.getLaptopId().equals(laptopId) && laptop.getModel().equals(model)){
+                return laptop;
+            }
+        }
+        return null;
+    }
+
     public static void main(String[] args) throws IOException {
         List<User> allRegisteredUserList = new ArrayList<>(); // 등록한 User 정보
         List<Laptop> allLaptopList = new ArrayList<>(); // 전체 노트북 리스트 (dell, macbook)
@@ -178,17 +197,30 @@ public class ObjectOrientationProgramming {
                         notebook.setRegisteredUser(currentUser);
                         allRegisteredLaptopList.put(notebook, currentUser);
                         currentUser.registerMyLaptop(notebook);
-                        currentLaptop = notebook;
+
                     }else{
                         System.out.println("이미 등록된 노트북이 존재합니다.");
                     }
                     break;
 
                 case 5: // 다른 사용자에게 노트북 양도하기
+                    if (currentUser == null){ // condition currentUser.equals(null) always false
+                        System.out.println("노트북 양도 수행 전, 로그인을 먼저 수행해주세요.");
+                        break;
+                    }
                     handOverLaptop(scanner, allRegisteredUserList, currentUser);
                     break;
 
                 case 6: // 랩탑 실행
+                    if (currentUser == null){ // condition currentUser.equals(null) always false
+                        System.out.println("노트북 실행 전, 로그인을 먼저 수행해주세요.");
+                        break;
+                    }
+                    currentLaptop = startLaptop(scanner, currentUser);
+
+                    if (currentLaptop == null) break; // 사용자가 실행하고자 하는 랩탑 정보를 적절히 입력하지 못했을 때, switch 문 다시 시작
+
+                    currentLaptop.systemStart(currentUser.getUserId(), currentUser.getPassword());
 
                     break;
 
