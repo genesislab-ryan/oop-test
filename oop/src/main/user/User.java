@@ -62,8 +62,15 @@ public class User {
         }
     }
 
-    public void handOverLaptop(Laptop laptop){
-        laptopList.remove(laptop);
-        laptop.initializeRegisteredUser(userId, password);
+    public void handOverLaptop(Laptop laptop, User user){
+        if (user.getUserName().equals(userName)){
+            System.out.println("동일 사용자에게는 양도할 수 없습니다.");
+        }else{
+            System.out.println("소유하고 있는 랩탑 모델 " + laptop.getModel() + ", 제조 번호 " + laptop.getLaptopId() + "을 양도합니다.");
+            laptopList.remove(laptop);
+            laptop.initializeRegisteredUser(userId, password);
+            laptop.setRegisteredUser(user);
+            System.out.println(user.getUserName() + "에게 성공적으로 랩탑이 양도 되었습니다.");
+        }
     }
 }

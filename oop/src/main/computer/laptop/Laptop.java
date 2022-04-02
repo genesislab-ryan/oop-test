@@ -145,4 +145,8 @@ public abstract class Laptop implements Portable {
     public String getLaptopId() {
         return laptopId;
     }
+
+    public String getModel() {
+        return model;
+    }
 }

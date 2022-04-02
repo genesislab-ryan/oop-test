@@ -103,6 +103,7 @@ public class ObjectOrientationProgramming {
         List<Laptop> allLaptopList = new ArrayList<>(); // 전체 노트북 리스트 (dell, macbook)
         HashMap<Laptop, User> allRegisteredLaptopList = new HashMap<>(); // 등록된 노트북 : laptop ID, 유저 정보
         User currentUser = null; // 현재 접속 중인 사용자 (초기화 값은 null)
+        Laptop currentLaptop = null; // 현재 사용 중인 랩탑 (초기화 값은 null)
         Integer userIdCount = 0;
         Boolean onOff = true;
 
@@ -153,14 +154,36 @@ public class ObjectOrientationProgramming {
 
                         if (notebook == null) break; // 이미 다른 사용자에게 등록된 랩탑으로 null 을 반환했을 때
 
+                        notebook.setRegisteredUser(currentUser);
                         allRegisteredLaptopList.put(notebook, currentUser);
-                        currentUser.getLaptopList().add(notebook);
+                        currentUser.registerMyLaptop(notebook);
+                        currentLaptop = notebook;
                     }else{
                         System.out.println("이미 등록된 노트북이 존재합니다.");
                     }
                     break;
 
                 case 5: // 다른 사용자에게 노트북 양도하기
+
+                    scanner.nextLine();
+
+                    System.out.println("양도할 유저 : ");
+                    String userName = scanner.nextLine();
+
+                    System.out.println("양도할 노트북 모델 : ");
+                    String userLaptopId = scanner.nextLine();
+
+                    for (User handOverUser : allRegisteredUserList){
+                        if (handOverUser.getUserName().equals(userName)){
+                            for(Laptop currentUserLaptop : currentUser.getLaptopList()){
+                                if (currentUserLaptop.getLaptopId().equals(userLaptopId)){
+                                    currentUser.handOverLaptop(currentUserLaptop, handOverUser);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
                     break;
 
                 case 6: // 랩탑 실행
