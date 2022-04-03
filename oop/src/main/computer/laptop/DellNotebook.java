@@ -10,23 +10,4 @@ public class DellNotebook extends Laptop {
         super(laptopId, model);
     }
 
-    public String getVender() {
-        return vender;
-    }
-
-    public void setDisplay(Integer display) {
-        this.display = display;
-    }
-
-    public Integer getDisplay() {
-        return display;
-    }
-
-    public void setWeight(Double weight) {
-        this.weight = weight;
-    }
-
-    public Double getWeight() {
-        return weight;
-    }
 }

@@ -157,4 +157,44 @@ public abstract class Laptop implements Portable {
     public List<ApplicationInfo> getApplicationList() {
         return applicationList;
     }
+
+    public String getVender() {
+        return vender;
+    }
+
+    public void setDisplay(Integer display) {
+        this.display = display;
+    }
+
+    public Integer getDisplay() {
+        return display;
+    }
+
+    public void setWeight(Double weight) {
+        this.weight = weight;
+    }
+
+    public Double getWeight() {
+        return weight;
+    }
+
+    public ApplicationInfo getRunningApplication() {
+        return runningApplication;
+    }
+
+    public void setRunningApplication(ApplicationInfo runningApplication) {
+        this.runningApplication = runningApplication;
+    }
+
+    public void setCpu(Integer cpu) {
+        this.cpu = cpu;
+    }
+
+    public void setDisk(Integer disk) {
+        this.disk = disk;
+    }
+
+    public void setRam(Integer ram) {
+        this.ram = ram;
+    }
 }
