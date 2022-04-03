@@ -8,8 +8,8 @@ import java.util.List;
 public abstract class Laptop implements Portable {
 
     private String vender;
-    private Double weight;
-    private Integer display;
+    private Double weight = 1.5;
+    private Integer display = 11;
     private String laptopId;
     private String model;
     private Integer cpu;
@@ -20,7 +20,8 @@ public abstract class Laptop implements Portable {
     private boolean systemOnOff;
     private User registeredUser;
 
-    public Laptop(String laptopId, String model){
+    public Laptop(String vender, String laptopId, String model){
+        this.vender = vender;
         this.laptopId = laptopId;
         this.model = model;
     }
@@ -93,7 +94,7 @@ public abstract class Laptop implements Portable {
 
     @Override
     public void exitApplication(ApplicationInfo application) {
-        if (runningApplication == null){
+        if (runningApplication == null || application == null){
             System.out.println("실행 중인 애플리케이션이 존재하지 않습니다.");
         }else{
             runningApplication = null;
@@ -184,6 +185,18 @@ public abstract class Laptop implements Portable {
 
     public void setRunningApplication(ApplicationInfo runningApplication) {
         this.runningApplication = runningApplication;
+    }
+
+    public Integer getCpu() {
+        return cpu;
+    }
+
+    public Integer getDisk() {
+        return disk;
+    }
+
+    public Integer getRam() {
+        return ram;
     }
 
     public void setCpu(Integer cpu) {

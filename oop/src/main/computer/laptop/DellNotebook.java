@@ -6,8 +6,8 @@ public class DellNotebook extends Laptop {
     private String vender = "dell";
     private double weight = 1.8;
 
-    public DellNotebook (String laptopId, String model){
-        super(laptopId, model);
+    public DellNotebook (String vender, String laptopId, String model){
+        super(vender, laptopId, model);
     }
 
 }

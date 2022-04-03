@@ -10,8 +10,8 @@ public class Macbook extends Laptop {
     private Integer display = 11;
     private Double weight = 1.5;
 
-    public Macbook (String laptopId, String model){
-        super(laptopId, model);
+    public Macbook (String vender, String laptopId, String model){
+        super(vender, laptopId, model);
     }
 
 }

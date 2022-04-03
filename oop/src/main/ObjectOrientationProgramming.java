@@ -92,12 +92,52 @@ public class ObjectOrientationProgramming {
         }
 
         if ("macbook air".equals(model) || "macbook pro".equals(model)){
-            Macbook macbook = new Macbook(laptopId, model);
-            return macbook;
+            Macbook macbook = new Macbook("apple", laptopId, model);
+            return setLaptopModelSpec(scanner, macbook);
         }else{
-            DellNotebook dellNotebook = new DellNotebook(laptopId, model);
-            return dellNotebook;
+            DellNotebook dellNotebook = new DellNotebook("dell", laptopId, model);
+            return setLaptopModelSpec(scanner, dellNotebook);
         }
+    }
+
+    public static Laptop setLaptopModelSpec(Scanner scanner, Laptop laptop){
+
+        if (laptop.getModel().equals("macbook air") || laptop.getModel().equals("XPS")){
+            System.out.println("Macbook air & XPS 기본 값은 cpu 4 GB, memory 8 GB, disk 256 GB 입니다.");
+            laptop.setModelSpec(4, 8, 256);
+        }else if (laptop.getModel().equals("macbook pro") || laptop.getModel().equals("Alienware")){
+            System.out.println("Macbook pro & Alienware 기본 값은 cpu 4 GB, memory 16 GB, disk 256 GB 입니다.");
+            laptop.setModelSpec(4, 16, 256);
+        }
+
+        System.out.println("스펙을 업그레이드 하시겠습니까? Y or N");
+        String yesOrNo = scanner.next();
+        if (yesOrNo.toLowerCase().equals("y")){
+            while (true){
+                System.out.println("CPU는 4 or 8 GB만 선택 가능합니다.");
+                Integer cpu = scanner.nextInt();
+                if (!cpu.equals(4) || !cpu.equals(8)){
+                    System.out.println("CPU 값을 잘못 입력하셨습니댜. 다시 시도해주세요.");
+                }
+
+                System.out.println("RAM은 8 or 16 GB만 선택 가능합니다.");
+                Integer ram = scanner.nextInt();
+                if (!ram.equals(8) || !ram.equals(16)){
+                    System.out.println("RAM 값을 잘못 입력하셨습니댜. 다시 시도해주세요.");
+                }
+
+                System.out.println("Disk는 256 or 512 GB만 선택 가능합니다.");
+                Integer disk = scanner.nextInt();
+                if (!ram.equals(256) || !ram.equals(512)){
+                    System.out.println("DISK 값을 잘못 입력하셨습니댜. 다시 시도해주세요.");
+                }
+                laptop.setModelSpec(cpu, ram, disk);
+                break;
+            }
+        }
+
+
+        return laptop;
     }
 
     public static void handOverLaptop(Scanner scanner,List<User> allRegisteredUserList, User currentUser){
@@ -179,12 +219,14 @@ public class ObjectOrientationProgramming {
 
             switch (number){
                 case 1: // 사용자 객체 정보 입력
+
                     currentUser = registerUserInfo(scanner, ++userIdCount);
                     allRegisteredUserList.add(currentUser);
                     currentUser.showRegisteredUserInfo();
                     break;
 
                 case 2: // 기존 사용자로 접속
+
                     while (true){
                         if (allRegisteredUserList.isEmpty()){
                             System.out.println("등록되어 있는 유저가 존재하지 않습니다.");
@@ -196,6 +238,7 @@ public class ObjectOrientationProgramming {
                     break;
 
                 case 3: // 사용자 정보 조회
+
                     if (currentUser == null){ // condition currentUser.equals(null) always false
                         System.out.println("로그인을 먼저 해주세요.");
                         break;
@@ -205,6 +248,7 @@ public class ObjectOrientationProgramming {
                     break;
 
                 case 4: // 사용자 노트북 등록
+
                     if (currentUser == null){
                         System.out.println("노트북 등록 전, 로그인을 먼저 수행해주세요.");
                         break;
@@ -218,6 +262,7 @@ public class ObjectOrientationProgramming {
 
                         notebook.setRegisteredUser(currentUser);
                         allRegisteredLaptopList.put(notebook, currentUser);
+                        allLaptopList.add(notebook);
                         currentUser.registerMyLaptop(notebook);
 
                     }else{
@@ -226,6 +271,7 @@ public class ObjectOrientationProgramming {
                     break;
 
                 case 5: // 다른 사용자에게 노트북 양도하기
+
                     if (currentUser == null){
                         System.out.println("노트북 양도 수행 전, 로그인을 먼저 수행해주세요.");
                         break;
@@ -234,6 +280,7 @@ public class ObjectOrientationProgramming {
                     break;
 
                 case 6: // 랩탑 실행
+
                     if (currentUser == null){
                         System.out.println("노트북 실행 전, 로그인을 먼저 수행해주세요.");
                         break;
@@ -247,6 +294,7 @@ public class ObjectOrientationProgramming {
                     break;
 
                 case 7: // 랩탑 종료
+
                     if (currentUser == null){
                         System.out.println("현재 접속 중인 사용자 정보가 없어 랩탑을 종료할 수 없습니다.");
                         break;
@@ -258,10 +306,22 @@ public class ObjectOrientationProgramming {
                     break;
 
                 case 8: // 랩탑 시스템 정보 출력
+
+                    if (currentUser == null){
+                        System.out.println("현재 실행 중인 랩탑이 존재하지 않습니다.");
+                        break;
+                    }
+
                     currentLaptop.showLaptopInfo();
                     break;
 
                 case 9: // 랩탑 시스템 사용량 출력
+
+                    if (currentUser == null){
+                        System.out.println("현재 실행 중인 랩탑이 존재하지 않습니다.");
+                        break;
+                    }
+
                     currentLaptop.showSystemUsage();
                     break;
 
@@ -279,6 +339,11 @@ public class ObjectOrientationProgramming {
                     break;
 
                 case 13: // 애플리케이션 종료
+                    if (currentLaptop == null){
+                        System.out.println("실행 중인 랩탑이 없습니다.");
+                        break;
+                    }
+
                     currentLaptop.exitApplication(currentApplication);
                     break;
 
