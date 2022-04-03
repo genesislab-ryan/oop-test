@@ -5,7 +5,8 @@ import main.computer.laptop.Laptop;
 import main.computer.laptop.Macbook;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -42,7 +43,7 @@ class UserTest {
         macbook = new Macbook("apple", "1a2b3c4d", "macbook air");
         dellNotebook = new DellNotebook("dell", "d4c3b2a1", "XPS");
         userIdCount = 0;
-        this.user = new User(userName, ++userIdCount, address, phoneNumber, birthDate, password);
+        user = new User(userName, ++userIdCount, address, phoneNumber, birthDate, password);
         macbookUser = new User(userName, ++userIdCount, address, phoneNumber, birthDate, password);
         dellNotebookUser = new User(userName, ++userIdCount, address, phoneNumber, birthDate, password);
         allLaptopUser = new User(userName, ++userIdCount, address, phoneNumber, birthDate, password);
@@ -67,7 +68,6 @@ class UserTest {
     @Test
     @DisplayName("생성한 유저 정보에 노트북 등록하기")
     public void registerMyLaptopTest() {
-
 
         macbookUser.registerMyLaptop(macbook);
         dellNotebookUser.registerMyLaptop(dellNotebook);

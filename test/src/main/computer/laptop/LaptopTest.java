@@ -3,9 +3,7 @@ package main.computer.laptop;
 import main.application.ApplicationInfo;
 import main.user.User;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -32,6 +30,72 @@ public class LaptopTest {
 
     @After
     public void tearDown() throws Exception{
+
+    }
+
+    @Test
+    @DisplayName("시스템 시작하기 메소드 테스트")
+    public void systemStartTest(){
+
+    }
+
+    @Test
+    @DisplayName("시스템 종료하기 메소드 테스트")
+    public void systemOffTest(){
+
+    }
+
+    @Test
+    @DisplayName("랩탑 정보 출력 메소드 테스트")
+    public void showLaptopInfoTest(){
+
+    }
+
+    @Test
+    @DisplayName("랩탑 사용량 출력 메소드 테스트")
+    public void showSystemUsageTest(){
+
+    }
+
+    @Test
+    @DisplayName("랩탑 유저 정보 초기화 메소드 테스트")
+    public void initializeRegisteredUserTest(){
+
+    }
+
+    @Test
+    @DisplayName("랩탑 애플리케이션 설치 메소드 테스트")
+    public void installApplicationTest(){
+
+    }
+
+    @Test
+    @DisplayName("랩탑 애플리케이션 삭제 메소드 테스트")
+    public void deletionApplicationTest(){
+
+    }
+
+    @Test
+    @DisplayName("랩탑 애플리케이션 종료 메소드 테스트")
+    public void exitApplicationTest(){
+
+    }
+
+    @Test
+    @DisplayName("랩탑 애플리케이션 실 메소드 테스트")
+    public void runApplicationTest(){
+
+    }
+
+    @Test
+    @DisplayName("랩탑 유저 정보 등록 메소드 테스트")
+    public void setRegisteredUserTest(){
+
+    }
+
+    @Test
+    @DisplayName("랩탑 모델 스펙 설정 메소드 테스트")
+    public void setModelSpecTest(){
 
     }
 }
