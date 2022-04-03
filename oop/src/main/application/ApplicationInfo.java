@@ -32,6 +32,18 @@ public abstract class ApplicationInfo implements Application{
         return ramUsage;
     }
 
+    public String getApplicationName() {
+        return applicationName;
+    }
+
+    public Integer getApplicationId() {
+        return applicationId;
+    }
+
+    public String getMarketPlace() {
+        return marketPlace;
+    }
+
     public List<Laptop> getApplicationInstalledLaptop() {
         return applicationInstalledLaptop;
     }

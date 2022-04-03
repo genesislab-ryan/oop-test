@@ -1,6 +1,7 @@
 package main;
 
 import main.application.Application;
+import main.application.ApplicationInfo;
 import main.computer.laptop.DellNotebook;
 import main.computer.laptop.Laptop;
 import main.computer.laptop.Macbook;
@@ -160,9 +161,11 @@ public class ObjectOrientationProgramming {
     public static void main(String[] args) throws IOException {
         List<User> allRegisteredUserList = new ArrayList<>(); // 등록한 User 정보
         List<Laptop> allLaptopList = new ArrayList<>(); // 전체 노트북 리스트 (dell, macbook)
+        List<ApplicationInfo> allApplicationList = new ArrayList<>();
         HashMap<Laptop, User> allRegisteredLaptopList = new HashMap<>(); // 등록된 노트북 : laptop ID, 유저 정보
         User currentUser = null; // 현재 접속 중인 사용자 (초기화 값은 null)
-        Laptop currentLaptop = null; // 현재 사용 중인 랩탑 (초기화 값은 null)
+        Laptop currentLaptop = null;
+        ApplicationInfo currentApplication = null;
         Integer userIdCount = 0;
         Boolean onOff = true;
 
@@ -200,7 +203,6 @@ public class ObjectOrientationProgramming {
 
                     currentUser.showRegisteredUserInfo();
                     break;
-
 
                 case 4: // 사용자 노트북 등록
                     if (currentUser == null){
@@ -277,11 +279,27 @@ public class ObjectOrientationProgramming {
                     break;
 
                 case 13: // 애플리케이션 종료
-
+                    currentLaptop.exitApplication(currentApplication);
                     break;
 
                 case 14: // 애플리케이션 삭제
 
+                    ApplicationInfo deleteApp = null;
+
+                    scanner.nextLine();
+
+                    System.out.println("삭제할 애플리케이션 이름을 입력해주세요. ");
+
+                    String applicationName = scanner.nextLine();
+
+                    for(ApplicationInfo applicationInfo : allApplicationList){
+                        if (applicationInfo.getApplicationName().equals(applicationName)){
+                            deleteApp = applicationInfo;
+                            break;
+                        }
+                    }
+
+                    currentLaptop.deleteApplication(deleteApp);
                     break;
 
                 case -1: // 프로그램 종료
