@@ -3,6 +3,9 @@ package main.user;
 import main.computer.laptop.DellNotebook;
 import main.computer.laptop.Laptop;
 import main.computer.laptop.Macbook;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,20 +17,45 @@ import static org.junit.Assert.*;
 
 class UserTest {
 
-    String userName = "tester";
-    Integer userId = 1;
-    String address = "울릉도 동남쪽 뱃길따라 이백리";
-    String phoneNumber = "010-1234-5678";
-    String birthDate = "1999-12-12";
-    String password = "1234";
-    Macbook macbook = new Macbook("1a2b3c4d", "macbook air");
-    DellNotebook dellNotebook = new DellNotebook("d4c3b2a1", "XPS");
-    Integer userIdCount = 0;
-    User user = new User(userName, ++userIdCount, address, phoneNumber, birthDate, password);
+    private String userName;
+    private Integer userId;
+    private String address;
+    private String phoneNumber;
+    private String birthDate;
+    private String password;
+    private Macbook macbook;
+    private DellNotebook dellNotebook;
+    private Integer userIdCount = 0;
+    private User user;
+    private User macbookUser;
+    private User dellNotebookUser;
+    private User allLaptopUser;
+
+    @Before
+    public void setup() throws Exception{
+        userName = "tester";
+        userId = 1;
+        address = "울릉도 동남쪽 뱃길따라 이백리";
+        phoneNumber = "010-1234-5678";
+        birthDate = "1999-12-12";
+        password = "1234";
+        macbook = new Macbook("apple", "1a2b3c4d", "macbook air");
+        dellNotebook = new DellNotebook("dell", "d4c3b2a1", "XPS");
+        userIdCount = 0;
+        this.user = new User(userName, ++userIdCount, address, phoneNumber, birthDate, password);
+        macbookUser = new User(userName, ++userIdCount, address, phoneNumber, birthDate, password);
+        dellNotebookUser = new User(userName, ++userIdCount, address, phoneNumber, birthDate, password);
+        allLaptopUser = new User(userName, ++userIdCount, address, phoneNumber, birthDate, password);
+    }
+
+    @After
+    public void teardown() throws Exception{
+
+    }
 
     @Test
     @DisplayName("생성한 유저 정보 가져오기")
-    void registeredUserInfoTest() {
+    public void registeredUserInfoTest() {
 
         assertEquals(user.getUserName(), "tester");
         assertEquals(user.getUserId(), (Integer)  1);
@@ -37,21 +65,9 @@ class UserTest {
     }
 
     @Test
-    @DisplayName("잘못된 유저 정보 입력하기")
-    void notRegisteredUserInfoTest(){
-        assertNotEquals(user.getUserName(), "test");
-        assertNotEquals(user.getUserId(), (Integer) 2);
-        assertNotEquals(user.getAddress(), "독도 북서쪽 뱃길따라 이백리");
-        assertNotEquals(user.getBirthDate(), "1999-01-01");
-        assertNotEquals(user.getPassword(), "4321");
-    }
-
-    @Test
     @DisplayName("생성한 유저 정보에 노트북 등록하기")
-    void registerMyLaptopTest() {
-        User macbookUser = new User(userName, ++userIdCount, address, phoneNumber, birthDate, password);
-        User dellNotebookUser = new User(userName, ++userIdCount, address, phoneNumber, birthDate, password);
-        User allLaptopUser = new User(userName, ++userIdCount, address, phoneNumber, birthDate, password);
+    public void registerMyLaptopTest() {
+
 
         macbookUser.registerMyLaptop(macbook);
         dellNotebookUser.registerMyLaptop(dellNotebook);
@@ -70,11 +86,7 @@ class UserTest {
 
     @Test
     @DisplayName("생성한 유저 정보에 등록안 된 노트북 입력하기")
-    void notRegisterMyLaptopTest() {
-
-        User macbookUser = new User(userName, ++userIdCount, address, phoneNumber, birthDate, password);
-        User dellNotebookUser = new User(userName, ++userIdCount, address, phoneNumber, birthDate, password);
-        User allLaptopUser = new User(userName, ++userIdCount, address, phoneNumber, birthDate, password);
+    public void notRegisterMyLaptopTest() {
 
         macbookUser.registerMyLaptop(macbook);
         dellNotebookUser.registerMyLaptop(dellNotebook);
@@ -102,7 +114,7 @@ class UserTest {
 
     @Test
     @DisplayName("사용자 객체에 등록된 노트북 양도하기")
-    void handOverLaptopTest() {
+    public void handOverLaptopTest() {
         List<Laptop> macbookList = new ArrayList<>(Arrays.asList(macbook));
         List<Laptop> dellNotebookList = new ArrayList<>(Arrays.asList(dellNotebook));
         List<Laptop> emptyLaptopList = new ArrayList<>();
@@ -121,8 +133,6 @@ class UserTest {
 
         assertEquals(macbookList, emptyLaptopList);
         assertEquals(dellNotebookList, emptyLaptopList);
-
     }
-
 
 }
