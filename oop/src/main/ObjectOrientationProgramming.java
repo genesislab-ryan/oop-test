@@ -116,7 +116,7 @@ public class ObjectOrientationProgramming {
             while (true){
                 System.out.println("CPU는 4 or 8 GB만 선택 가능합니다.");
                 Integer cpu = scanner.nextInt();
-                if (!cpu.equals(4) || !cpu.equals(8)){
+                if (!cpu.equals(4) || !cpu.equals(8)){ // Condition '!cpu.equals(4) || !cpu.equals(8)' is always 'true'
                     System.out.println("CPU 값을 잘못 입력하셨습니댜. 다시 시도해주세요.");
                 }
 
@@ -128,14 +128,15 @@ public class ObjectOrientationProgramming {
 
                 System.out.println("Disk는 256 or 512 GB만 선택 가능합니다.");
                 Integer disk = scanner.nextInt();
-                if (!ram.equals(256) || !ram.equals(512)){
+                if (!disk.equals(256) || !disk.equals(512)){
                     System.out.println("DISK 값을 잘못 입력하셨습니댜. 다시 시도해주세요.");
                 }
                 laptop.setModelSpec(cpu, ram, disk);
                 break;
             }
+        }else{
+            System.out.println("모델 스펙 업그레이드를 진행하지 않습니다.");
         }
-
 
         return laptop;
     }
@@ -194,6 +195,49 @@ public class ObjectOrientationProgramming {
         System.out.println("현재 랩탑에 설치되어 있는 애플리케이션 목록입니다.");
         for (Application application : currentLaptop.getApplicationList()){
             System.out.println(application);
+        }
+        return null;
+    }
+
+    public static ApplicationInfo installNewApplication(Scanner scanner, List<ApplicationInfo> allApplicationList){
+        System.out.println("신규 애플리케이션을 설치합니다.");
+
+        System.out.println("애플리케이션 이름 : ");
+        String appName = scanner.nextLine();
+
+        for (ApplicationInfo applicationInfo : allApplicationList){
+            if (applicationInfo.getApplicationName().equals(appName)){
+                return applicationInfo;
+            }
+        }
+        return null;
+    }
+
+    public static ApplicationInfo runNewApplication(Scanner scanner, List<ApplicationInfo> allApplicationList){
+        System.out.println("애플리케이션을 실행합니다.");
+
+        System.out.println("애플리케이션 이름 : ");
+        String runApp = scanner.nextLine();
+
+        for (ApplicationInfo applicationInfo : allApplicationList){
+            if (applicationInfo.getApplicationName().equals(runApp)){
+                return applicationInfo;
+            }
+        }
+        return null;
+    }
+
+    public static ApplicationInfo removeApplication(Scanner scanner, List<ApplicationInfo> allApplicationList){
+        scanner.nextLine();
+
+        System.out.println("삭제할 애플리케이션 이름을 입력해주세요. ");
+
+        String applicationName = scanner.nextLine();
+
+        for(ApplicationInfo applicationInfo : allApplicationList){
+            if (applicationInfo.getApplicationName().equals(applicationName)){
+                return applicationInfo;
+            }
         }
         return null;
     }
@@ -332,10 +376,19 @@ public class ObjectOrientationProgramming {
 
                 case 11: // 신규 애플리케이션 설치
 
+                    if (currentLaptop == null){
+                        System.out.println("현재 실행 중인 랩탑이 존재하지 않습니다.");
+                        break;
+                    }
+                    currentLaptop.installApplication(installNewApplication(scanner, allApplicationList));
                     break;
 
                 case 12: // 애플리케이션 실행
-
+                    if (currentLaptop == null){
+                        System.out.println("현재 실행 중인 랩탑이 존재하지 않습니다.");
+                        break;
+                    }
+                    currentLaptop.runApplication(runNewApplication(scanner, allApplicationList));
                     break;
 
                 case 13: // 애플리케이션 종료
@@ -348,23 +401,11 @@ public class ObjectOrientationProgramming {
                     break;
 
                 case 14: // 애플리케이션 삭제
-
-                    ApplicationInfo deleteApp = null;
-
-                    scanner.nextLine();
-
-                    System.out.println("삭제할 애플리케이션 이름을 입력해주세요. ");
-
-                    String applicationName = scanner.nextLine();
-
-                    for(ApplicationInfo applicationInfo : allApplicationList){
-                        if (applicationInfo.getApplicationName().equals(applicationName)){
-                            deleteApp = applicationInfo;
-                            break;
-                        }
+                    if (allApplicationList.isEmpty()){
+                        System.out.println("삭제할 애플리케이션이 없습니다.");
+                        break;
                     }
-
-                    currentLaptop.deleteApplication(deleteApp);
+                    currentLaptop.deleteApplication(removeApplication(scanner, allApplicationList));
                     break;
 
                 case -1: // 프로그램 종료
