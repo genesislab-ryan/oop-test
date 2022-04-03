@@ -17,7 +17,7 @@ public abstract class Laptop implements Portable {
     private Integer disk;
     List<ApplicationInfo> applicationList;
     private ApplicationInfo runningApplication;
-    private boolean systemStart;
+    private boolean systemOnOff;
     private User registeredUser;
 
     public Laptop(String laptopId, String model){
@@ -28,24 +28,24 @@ public abstract class Laptop implements Portable {
     @Override
     public Boolean systemStart(Integer userId, String password){
         if (registeredUser.getUserId().equals(userId) && registeredUser.getPassword().equals(password)){
-            systemStart = true;
+            systemOnOff = true;
             System.out.println("환영합니다. " + registeredUser.getUserName() + "님!");
         } else{
             System.out.println("입력하신 계정 정보가 일치하지 않습니다. 다시 시도해주세요");
         }
-        return systemStart;
+        return systemOnOff;
     }
 
     @Override
     public void systemOff() {
-        systemStart = false;
+        systemOnOff = false;
         System.out.println("노트북이 종료되었습니다.");
     };
 
     @Override
     public void showLaptopInfo() {
 
-        String runningState = systemStart == true ? "실행" : "종료";
+        String runningState = systemOnOff == true ? "실행" : "종료";
         System.out.println("========== 노트북 정보 ==========");
         System.out.println("제조사 : " + vender + "\n모델명 : " + model + "\n디스플레이 : " + display
                 + "\n무게 : " + weight + "Kg" + "\n랩탑 실행 여부 : " + runningState);
@@ -148,5 +148,13 @@ public abstract class Laptop implements Portable {
 
     public String getModel() {
         return model;
+    }
+
+    public Boolean getSystemOnOff(){
+        return systemOnOff;
+    }
+
+    public List<ApplicationInfo> getApplicationList() {
+        return applicationList;
     }
 }

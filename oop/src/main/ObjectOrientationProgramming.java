@@ -1,5 +1,6 @@
 package main;
 
+import main.application.Application;
 import main.computer.laptop.DellNotebook;
 import main.computer.laptop.Laptop;
 import main.computer.laptop.Macbook;
@@ -138,6 +139,24 @@ public class ObjectOrientationProgramming {
         return null;
     }
 
+    public static Laptop showCurrentLaptopApplicationList(Laptop currentLaptop){
+        if (currentLaptop.getSystemOnOff().equals(false)){
+            System.out.println("랩탑이 켜져 있지 않습니다. 먼저 랩탑을 실행해주세요.");
+            return null;
+        }
+
+        if (currentLaptop.getApplicationList() == null){
+            System.out.println("랩탑에 설치되어 있는 애플리케이션이 존재하지 않습니다.");
+            return null;
+        }
+
+        System.out.println("현재 랩탑에 설치되어 있는 애플리케이션 목록입니다.");
+        for (Application application : currentLaptop.getApplicationList()){
+            System.out.println(application);
+        }
+        return null;
+    }
+
     public static void main(String[] args) throws IOException {
         List<User> allRegisteredUserList = new ArrayList<>(); // 등록한 User 정보
         List<Laptop> allLaptopList = new ArrayList<>(); // 전체 노트북 리스트 (dell, macbook)
@@ -177,10 +196,11 @@ public class ObjectOrientationProgramming {
                     if (currentUser == null){ // condition currentUser.equals(null) always false
                         System.out.println("로그인을 먼저 해주세요.");
                         break;
-                    }else{
-                        currentUser.showRegisteredUserInfo();
-                        break;
                     }
+
+                    currentUser.showRegisteredUserInfo();
+                    break;
+
 
                 case 4: // 사용자 노트북 등록
                     if (currentUser == null){
@@ -229,8 +249,10 @@ public class ObjectOrientationProgramming {
                         System.out.println("현재 접속 중인 사용자 정보가 없어 랩탑을 종료할 수 없습니다.");
                         break;
                     }
+
                     currentLaptop.systemOff();
                     currentLaptop = null;
+
                     break;
 
                 case 8: // 랩탑 시스템 정보 출력
@@ -243,6 +265,7 @@ public class ObjectOrientationProgramming {
 
                 case 10: // 랩탑에 설치된 애플리케이션 조회
 
+                    showCurrentLaptopApplicationList(currentLaptop);
                     break;
 
                 case 11: // 신규 애플리케이션 설치
