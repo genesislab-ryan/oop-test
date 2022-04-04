@@ -12,6 +12,7 @@ public abstract class ApplicationInfo implements Application{
     private Integer cpuUsage;
     private Integer ramUsage;
     private Integer diskUsage;
+    private Boolean applicationSystemOnOff;
     private List<Laptop> applicationInstalledLaptop;
 
     public ApplicationInfo(Integer applicationId, String applicationName, String marketPlace){
@@ -61,4 +62,18 @@ public abstract class ApplicationInfo implements Application{
     public List<Laptop> getApplicationInstalledLaptop() {
         return applicationInstalledLaptop;
     }
+
+    public Boolean applicationOnOffCheck(Boolean systemOnOff){
+        if (systemOnOff.equals(true)){
+            applicationSystemOnOff = true;
+
+        }
+        else{
+            applicationSystemOnOff = false;
+            System.out.println("랩탑을 먼저 실행해주세요.");
+        }
+
+        return applicationSystemOnOff;
+    }
+
 }

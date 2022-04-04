@@ -44,6 +44,7 @@ public class LaptopTest {
     @Test
     @DisplayName("시스템 시작하기 메소드 테스트")
     public void systemStartTest(){
+
         assertTrue("맥북 실행에 에러가 발생했습니다.", macbookTest.systemStart(macUserId, password));
         assertTrue("델 노트북 실행에 에러가 발생했습니다.", dellNotebook.systemStart(dellUserId, password));
     }

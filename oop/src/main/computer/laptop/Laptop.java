@@ -34,6 +34,8 @@ public abstract class Laptop implements Portable {
             System.out.println("환영합니다. " + registeredUser.getUserName() + "님!");
         } else{
             System.out.println("입력하신 계정 정보가 일치하지 않습니다. 다시 시도해주세요");
+            systemOnOff = false;
+            return systemOnOff;
         }
         return systemOnOff;
     }
@@ -75,11 +77,14 @@ public abstract class Laptop implements Portable {
     @Override
     public List<ApplicationInfo> installApplication(ApplicationInfo application){
         applicationList.add(application);
+
         if (this.disk - application.getDiskUsage() < 0){
             System.out.println("Disk 용량이 부족하여 애플리케이션을 설치할 수 없습니다. ");
+        }else{
+            this.disk -= application.getDiskUsage();
+            System.out.println("애플리케이션이 설치되었습니다.");
         }
-        this.disk -= application.getDiskUsage();
-        System.out.println("애플리케이션이 설치되었습니다.");
+
         return applicationList;
     };
 
@@ -113,21 +118,25 @@ public abstract class Laptop implements Portable {
         if (!applicationList.contains(application)){
             System.out.println("애플리케이션이 현재 설치되어 있지 않습니다. 애플리케이션을 설치 후, 실행합니다");
             installApplication(application);
+            this.ram -= application.getRamUsage();
+            this.cpu -= application.getCpuUsage();
             runningApplication = application;
-        }
-        if (runningApplication != null) {
+
+        }else if (runningApplication != null) {
             System.out.println("현재 사용 중인 애플리케이션을 종료하고, 새로운 애플리케이션을 실행합니다.");
             exitApplication(application);
             this.ram -= application.getRamUsage();
             this.cpu -= application.getCpuUsage();
             runningApplication = application;
+
         }else{
             System.out.println("애플리케이션을 실행합니다.");
             this.ram -= application.getRamUsage();
             this.cpu -= application.getCpuUsage();
             runningApplication = application;
         }
-    };
+
+    }
 
     public User getRegisteredUser() {
         return registeredUser;
@@ -199,9 +208,7 @@ public abstract class Laptop implements Portable {
         return disk;
     }
 
-    public Integer getRam() {
-        return ram;
-    }
+    public Integer getRam() { return ram;}
 
     public void setCpu(Integer cpu) {
         this.cpu = cpu;
