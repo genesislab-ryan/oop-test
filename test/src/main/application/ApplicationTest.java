@@ -19,7 +19,8 @@ public class ApplicationTest {
     private String password;
     private Macbook macbookTest;
     private DellNotebook dellNotebook;
-    private MsExcel msExcel;
+    private MsExcel msExcelforMac;
+    private MsExcel msExcelforDell;
 
     @BeforeEach
     public void setUp() throws Exception{
@@ -34,18 +35,56 @@ public class ApplicationTest {
         macbookTest.setModelSpec(4, 8, 256); // 모델 스펙 정의 필수 (애플리케이션 설치 시)
         macbookTest.setRegisteredUser(macUser);
 
+
         dellNotebook = new DellNotebook("dell", "1a2b3c4d", "XPS");
         dellNotebook.setModelSpec(4, 8, 256); // 모델 스펙 정의 필수 (애플리케이션 설치 시)
         dellNotebook.setRegisteredUser(dellNotebookUser);
 
-        msExcel = new MsExcel(1, "msExcel", "app store");
-        msExcel.setApplicationCapacity(1, 3, 20);
+        msExcelforMac = new MsExcel(1, "msExcel", "app store");
+        msExcelforMac.setApplicationCapacity(1, 3, 20);
+
+        msExcelforDell = new MsExcel(1, "msExcel", "app market");
+        msExcelforDell.setApplicationCapacity(1, 3, 20);
+
+        macbookTest.installApplication(msExcelforMac);
+        dellNotebook.installApplication(msExcelforDell);
     }
 
     @Test
     @DisplayName("랩탑 실행 상태에 따른 애플리케이션 실행 테스트")
     public void applicationSystemOnOffTest(){
-        assertTrue(msExcel.applicationOnOffCheck(macbookTest.systemStart(macUserId, password)));
+        assertTrue(msExcelforMac.applicationOnOffCheck(macbookTest.systemStart(macUserId, password)));
+        assertTrue(msExcelforDell.applicationOnOffCheck(dellNotebook.systemStart(dellUserId, password)));
     }
 
+    @Test
+    @DisplayName("애플리케이션 설치한 유저 정보 확인 메소드 테스트")
+    public void addInstalledApplicationUser(){
+        msExcelforMac.addInstalledApplicationUser(macbookTest);
+        msExcelforDell.addInstalledApplicationUser(dellNotebook);
+
+        assertTrue(msExcelforMac.getRegistertedUserList().contains(macUser));
+        assertTrue(msExcelforDell.getRegistertedUserList().contains(dellNotebookUser));
+    }
+
+
+
+    @Test
+    @DisplayName("애플리케이션 랩탑 사용량 메소드 설정 테스트")
+    public void setApplicationUsageTest(){
+        Integer cpu = 2;
+        Integer ram = 5;
+        Integer disk = 60;
+
+        msExcelforMac.setApplicationCapacity(cpu, ram, disk);
+        msExcelforDell.setApplicationCapacity(cpu, ram, disk);
+
+        assertEquals(msExcelforMac.getCpuUsage(), cpu);
+        assertEquals(msExcelforMac.getRamUsage(), ram);
+        assertEquals(msExcelforMac.getDiskUsage(), disk);
+
+        assertEquals(msExcelforDell.getCpuUsage(), cpu);
+        assertEquals(msExcelforDell.getRamUsage(), ram);
+        assertEquals(msExcelforDell.getDiskUsage(), disk);
+    }
 }
