@@ -3,6 +3,7 @@ package main.computer.laptop;
 import main.application.ApplicationInfo;
 import main.user.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Laptop implements Portable {
@@ -15,7 +16,7 @@ public abstract class Laptop implements Portable {
     private Integer cpu;
     private Integer ram;
     private Integer disk;
-    List<ApplicationInfo> applicationList;
+    List<ApplicationInfo> applicationList = new ArrayList<>();
     private ApplicationInfo runningApplication;
     private boolean systemOnOff;
     private User registeredUser;
@@ -74,6 +75,9 @@ public abstract class Laptop implements Portable {
     @Override
     public List<ApplicationInfo> installApplication(ApplicationInfo application){
         applicationList.add(application);
+        if (this.disk - application.getDiskUsage() < 0){
+            System.out.println("Disk 용량이 부족하여 애플리케이션을 설치할 수 없습니다. ");
+        }
         this.disk -= application.getDiskUsage();
         System.out.println("애플리케이션이 설치되었습니다.");
         return applicationList;
