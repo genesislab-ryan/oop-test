@@ -11,7 +11,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-class UserTest {
+public class UserTest {
 
     private String userName;
     private Integer userId;
