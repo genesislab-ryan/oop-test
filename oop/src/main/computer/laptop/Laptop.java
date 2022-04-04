@@ -18,7 +18,7 @@ public abstract class Laptop implements Portable {
     private Integer disk;
     List<ApplicationInfo> applicationList = new ArrayList<>();
     private ApplicationInfo runningApplication;
-    private boolean systemOnOff;
+    private Boolean systemOnOff;
     private User registeredUser;
 
     public Laptop(String vendor, String laptopId, String model){
@@ -34,8 +34,6 @@ public abstract class Laptop implements Portable {
             System.out.println("환영합니다. " + registeredUser.getUserName() + "님!");
         } else{
             System.out.println("입력하신 계정 정보가 일치하지 않습니다. 다시 시도해주세요");
-            systemOnOff = false;
-            return systemOnOff;
         }
         return systemOnOff;
     }

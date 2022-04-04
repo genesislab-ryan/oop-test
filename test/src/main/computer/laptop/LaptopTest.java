@@ -45,8 +45,16 @@ public class LaptopTest {
     @DisplayName("시스템 시작하기 메소드 테스트")
     public void systemStartTest(){
 
+        Exception exception = assertThrows(NullPointerException.class, ()->{
+            macbookTest.systemStart(dellUserId, password).equals(true);
+        });
+        String expectedMessage = "Cannot invoke \"java.lang.Boolean.equals(Object)\" because the return value of \"main.computer.laptop.Macbook.systemStart(java.lang.Integer, String)\" is null";
+        String actualMessage = exception.getMessage();
+        System.out.println(actualMessage);
+
         assertTrue("맥북 실행에 에러가 발생했습니다.", macbookTest.systemStart(macUserId, password));
         assertTrue("델 노트북 실행에 에러가 발생했습니다.", dellNotebook.systemStart(dellUserId, password));
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 
     @Test
