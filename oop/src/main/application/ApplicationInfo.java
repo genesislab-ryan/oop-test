@@ -20,6 +20,14 @@ public abstract class ApplicationInfo implements Application{
         this.marketPlace = marketPlace;
     }
 
+    @Override
+    public void showApplicationInfo(){
+        System.out.println("=================애플리케이션은 정보=============");
+        System.out.println("애플리케이션 이름 : " + applicationName + "\n애플리케이션 ID : "
+                + applicationId + "\nCPU 사용량 : " + cpuUsage + "\nRAM 사용량 : " + ramUsage + "\nDisk 사용량 : "  + diskUsage);
+        System.out.println("============================================");
+    }
+
     public Integer getCpuUsage() {
         return cpuUsage;
     }
@@ -34,6 +42,12 @@ public abstract class ApplicationInfo implements Application{
 
     public String getApplicationName() {
         return applicationName;
+    }
+
+    public void setApplicationCapacity(Integer cpu, Integer ram, Integer disk){
+        this.cpuUsage = cpu;
+        this.ramUsage = ram;
+        this.diskUsage = disk;
     }
 
     public Integer getApplicationId() {
