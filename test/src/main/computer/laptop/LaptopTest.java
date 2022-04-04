@@ -116,11 +116,16 @@ public class LaptopTest {
         macbookTest.runApplication(msExcel);
         dellNotebook.runApplication(msExcel);
 
-        msExcel.showApplicationInfo();
-
         assertNotNull("맥북에서 애플리케이션이 실행되지 않았습니다.", macbookTest.getRunningApplication());
         assertNotNull("델 노트북에서 애플리케이션이 실행되지 않습니다.", dellNotebook.getRunningApplication());
 
+        assertEquals("맥북의 잔여 CPU가 잘못 표기되었습니다.", macbookTest.getCpu(), (Integer) 3);
+        assertEquals("맥북의 잔여 RAM가 잘못 표기되었습니다.", macbookTest.getRam(), (Integer) 5);
+        assertEquals("맥북의 잔여 Disk가 잘못 표기되었습니다.", macbookTest.getDisk(), (Integer) 236);
+
+        assertEquals("델노트북의 잔여 CPU가 잘못 표기되었습니다.", dellNotebook.getCpu(), (Integer) 3);
+        assertEquals("델노트북의 잔여 RAM가 잘못 표기되었습니다.", dellNotebook.getRam(), (Integer) 5);
+        assertEquals("델노트북의 잔여 Disk가 잘못 표기되었습니다.", dellNotebook.getDisk(), (Integer) 236);
     }
 
     @Test

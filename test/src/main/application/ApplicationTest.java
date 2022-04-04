@@ -1,20 +1,14 @@
 package main.application;
 
-import main.computer.laptop.DellNotebook;
-import main.computer.laptop.Laptop;
 import main.computer.laptop.Macbook;
 import main.user.User;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
-
-public class MsExcelTest {
+public class ApplicationTest {
 
     private User user;
     private Integer userId;
