@@ -7,7 +7,7 @@ import java.util.List;
 
 public abstract class Laptop implements Portable {
 
-    private String vender;
+    private String vendor;
     private Double weight = 1.5;
     private Integer display = 11;
     private String laptopId;
@@ -20,8 +20,8 @@ public abstract class Laptop implements Portable {
     private boolean systemOnOff;
     private User registeredUser;
 
-    public Laptop(String vender, String laptopId, String model){
-        this.vender = vender;
+    public Laptop(String vendor, String laptopId, String model){
+        this.vendor = vendor;
         this.laptopId = laptopId;
         this.model = model;
     }
@@ -48,7 +48,7 @@ public abstract class Laptop implements Portable {
 
         String runningState = systemOnOff == true ? "실행" : "종료";
         System.out.println("========== 노트북 정보 ==========");
-        System.out.println("제조사 : " + vender + "\n모델명 : " + model + "\n디스플레이 : " + display
+        System.out.println("제조사 : " + vendor + "\n모델명 : " + model + "\n디스플레이 : " + display
                 + "\n무게 : " + weight + "Kg" + "\n랩탑 실행 여부 : " + runningState);
         System.out.println("====================================");
     };
@@ -159,8 +159,8 @@ public abstract class Laptop implements Portable {
         return applicationList;
     }
 
-    public String getVender() {
-        return vender;
+    public String getVendor() {
+        return vendor;
     }
 
     public void setDisplay(Integer display) {
