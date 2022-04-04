@@ -3,12 +3,7 @@ package main.user;
 import main.computer.laptop.DellNotebook;
 import main.computer.laptop.Laptop;
 import main.computer.laptop.Macbook;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,7 +27,7 @@ class UserTest {
     private User dellNotebookUser;
     private User allLaptopUser;
 
-    @Before
+    @BeforeEach
     public void setup() throws Exception{
         userName = "tester";
         userId = 1;
@@ -47,12 +42,13 @@ class UserTest {
         macbookUser = new User(userName, ++userIdCount, address, phoneNumber, birthDate, password);
         dellNotebookUser = new User(userName, ++userIdCount, address, phoneNumber, birthDate, password);
         allLaptopUser = new User(userName, ++userIdCount, address, phoneNumber, birthDate, password);
+
     }
 
-    @After
+    @AfterEach
     public void teardown() throws Exception{
-
     }
+
 
     @Test
     @DisplayName("생성한 유저 정보 가져오기")
@@ -63,6 +59,7 @@ class UserTest {
         assertEquals(user.getAddress(), "울릉도 동남쪽 뱃길따라 이백리");
         assertEquals(user.getBirthDate(), "1999-12-12");
         assertEquals(user.getPassword(), "1234");
+
     }
 
     @Test
@@ -84,55 +81,27 @@ class UserTest {
 
     }
 
-    @Test
-    @DisplayName("생성한 유저 정보에 등록안 된 노트북 입력하기")
-    public void notRegisterMyLaptopTest() {
-
-        macbookUser.registerMyLaptop(macbook);
-        dellNotebookUser.registerMyLaptop(dellNotebook);
-        allLaptopUser.registerMyLaptop(macbook);
-        allLaptopUser.registerMyLaptop(dellNotebook);
-
-        List<Laptop> macbookList = Arrays.asList(macbook);
-        List<Laptop> dellNotebookList = Arrays.asList(dellNotebook);
-        List<Laptop> allLaptopList = Arrays.asList(macbook, dellNotebook);
-        List<Laptop> emptyLaptopList = new ArrayList<>();
-
-        assertNotEquals(macbookUser.getLaptopList(), emptyLaptopList);
-        assertNotEquals(macbookUser.getLaptopList(), dellNotebookList);
-        assertNotEquals(macbookUser.getLaptopList(), allLaptopList);
-
-        assertNotEquals(dellNotebookUser.getLaptopList(), emptyLaptopList);
-        assertNotEquals(dellNotebookUser.getLaptopList(), macbookList);
-        assertNotEquals(dellNotebookUser.getLaptopList(), allLaptopList);
-
-        assertNotEquals(allLaptopUser.getLaptopList(), emptyLaptopList);
-        assertNotEquals(allLaptopUser.getLaptopList(), macbookList);
-        assertNotEquals(allLaptopUser.getLaptopList(), dellNotebookList);
-
-    }
-
-    @Test
-    @DisplayName("사용자 객체에 등록된 노트북 양도하기")
-    public void handOverLaptopTest() {
-        List<Laptop> macbookList = new ArrayList<>(Arrays.asList(macbook));
-        List<Laptop> dellNotebookList = new ArrayList<>(Arrays.asList(dellNotebook));
-        List<Laptop> emptyLaptopList = new ArrayList<>();
-
-        macbook.setRegisteredUser(user);
-        dellNotebook.setRegisteredUser(user);
-
-        macbook.initializeRegisteredUser(userId, password);
-        macbookList.remove(macbook);
-
-        dellNotebook.initializeRegisteredUser(userId, password);
-        dellNotebookList.remove(dellNotebook);
-
-        assertEquals(macbook.getRegisteredUser(), null);
-        assertEquals(dellNotebook.getRegisteredUser(), null);
-
-        assertEquals(macbookList, emptyLaptopList);
-        assertEquals(dellNotebookList, emptyLaptopList);
-    }
+//    @Test
+//    @DisplayName("사용자 객체에 등록된 노트북 양도하기")
+//    public void handOverLaptopTest() {
+//        List<Laptop> macbookList = new ArrayList<>(Arrays.asList(macbook));
+//        List<Laptop> dellNotebookList = new ArrayList<>(Arrays.asList(dellNotebook));
+//        List<Laptop> emptyLaptopList = new ArrayList<>();
+//
+//        macbook.setRegisteredUser(user);
+//        dellNotebook.setRegisteredUser(user);
+//
+//        macbook.initializeRegisteredUser(userId, password);
+//        macbookList.remove(macbook);
+//
+//        dellNotebook.initializeRegisteredUser(userId, password);
+//        dellNotebookList.remove(dellNotebook);
+//
+//        assertEquals(macbook.getRegisteredUser(), null);
+//        assertEquals(dellNotebook.getRegisteredUser(), null);
+//
+//        assertEquals(macbookList, emptyLaptopList);
+//        assertEquals(dellNotebookList, emptyLaptopList);
+//    }
 
 }
